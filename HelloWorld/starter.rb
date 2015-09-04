@@ -1,2 +1,2 @@
 require 'aws/decider'
-AWS::Flow::start("HelloWorld.hello", { name: "AWS Flow Framework!" })
+AWS::Flow::start("HelloWoaaarld.hello", { name: "AWS Flow Framework!" })
