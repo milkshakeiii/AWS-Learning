@@ -1,6 +1,6 @@
 from flask import Flask
 
-def say_hello(username = "earthlings and people named Chris"):
+def say_hello(username = "earthlings and people named Tom"):
   return '<p>Hello %s!</p>' % username
 
 #bits of text for the page

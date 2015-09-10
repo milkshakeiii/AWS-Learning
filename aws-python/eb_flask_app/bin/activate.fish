@@ -32,7 +32,7 @@ end
 # unset irrelevant variables
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/home/henry/AWS/aws-python/eb_flask_app"
+set -gx VIRTUAL_ENV "/home/henry/AWS/AWS-Learning/aws-python/eb_flask_app"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

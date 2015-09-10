@@ -39,7 +39,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/henry/AWS/aws-python/eb_flask_app"
+VIRTUAL_ENV="/home/henry/AWS/AWS-Learning/aws-python/eb_flask_app"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
