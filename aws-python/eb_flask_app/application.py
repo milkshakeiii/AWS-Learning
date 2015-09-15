@@ -43,17 +43,29 @@ def game_representation(game_id):
 def take_turn():
 	turn = GameTurn()
 	turn.ParseFromString(request.data)
-	
 	game = get_game(turn.game_id)
-	game = ResultOfPlace(game, turn.placed_piece_type, turn.row_place, turn.column_place)
+	game_history = get_game_history(turn.game_id)
 
-	games[turn.game_id] = game
+	if (ValidateTurn(game_history, turn)):
+		game = ResultOfPlace(game, turn)
+		record_turn(turn.game_id, turn)
+	else:
+		return "nooooo...! illegal move :("
 
 	return "success?"
 
+def get_game_history(game_id):
+	game_history = games.setdefault(game_id, GameHistory())
+	return game_history
+
 def get_game(game_id):
-	game = games.setdefault(game_id, EmptyGame())
-	return game
+	game_history = get_game_history(game_id)
+	return GameFromHistory(game_history)
+
+def record_turn(game_id, turn):
+	game_history = get_game_history(game_id)
+	game_history.constituent_turns.extend([turn])
+	games[game_id] = game_history
 
 # run the app
 if __name__ == "__main__":
