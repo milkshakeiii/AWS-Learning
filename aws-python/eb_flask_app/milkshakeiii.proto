@@ -18,6 +18,7 @@ message GameTurn
 	optional PieceType placed_piece = 2;
 	optional int32 column_place = 3;
 	optional int32 row_place = 4;
+	optional string player_id = 5;
 }
 
 message GameHistory

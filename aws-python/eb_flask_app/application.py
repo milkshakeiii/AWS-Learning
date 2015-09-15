@@ -29,8 +29,14 @@ application.add_url_rule('/', 'index', (lambda:
 @application.route("/view_game/<game_id>")
 def game_representation(game_id):
 	game = get_game(game_id)
+	game_history = get_game_history(game_id)
 	if (game == EmptyGame()):
 		return "That game could not be found.  To start the game, just make the first move!"
+	
+	winner = CheckForWinner(game_history)
+	if (winner != None):
+		return "This game is in " + winner + "'s bag.  Also, I can't see " + winner  + " anywhere.  And his bag is padlocked and made of adamantium.  Basically I don't think you're getting this game out of " + winner + "'s bag any time soon.  Maybe try another game.  Or another bag?"
+
 	game_string = ""
 	for i in range(len(game)):
 		row_string = ""
@@ -46,11 +52,11 @@ def take_turn():
 	game = get_game(turn.game_id)
 	game_history = get_game_history(turn.game_id)
 
-	if (ValidateTurn(game_history, turn)):
-		game = ResultOfPlace(game, turn)
-		record_turn(turn.game_id, turn)
-	else:
+	if (not ValidateTurn(game_history, turn)):
 		return "nooooo...! illegal move :("
+
+	game = ResultOfPlace(game, turn)
+	record_turn(turn.game_id, turn)
 
 	return "success?"
 

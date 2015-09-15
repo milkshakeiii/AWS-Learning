@@ -19,6 +19,34 @@ def CountPieces(game):
 				count = count + 1
 	return count
 
+def CheckForWinner(game_history):
+	if (len(game_history.constituent_turns)) <= 6:
+		return None
+	game = GameFromHistory(game_history)
+	piece_owners = PieceOwnersFromHistory(game_history)
+	living_piece_owners = set()
+	for row in range(len(game)):
+		for column in range(len(game[row])):
+			piece = game[row][column]
+			if (piece != NO_PIECE):
+				living_piece_owners.add(piece_owners[row][column])
+	print living_piece_owners
+	if (len(living_piece_owners) == 1):
+		return living_piece_owners.pop()
+	return None
+				
+		
+
+def PieceOwnersFromHistory(game_history):
+	game = GameFromHistory(game_history)
+	piece_owners = [[None for square in game[0]] for row in game]
+	for turn in game_history.constituent_turns:
+		row = turn.row_place
+		column = turn.column_place
+		piece_owners[row][column] = turn.player_id
+	print piece_owners
+	return piece_owners
+
 def GameFromHistory(game_history):
 	game = EmptyGame()
 	for turn in game_history.constituent_turns:

@@ -14,7 +14,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='milkshakeiii.proto',
   package='milkshakeiii',
-  serialized_pb='\n\x12milkshakeiii.proto\x12\x0cmilkshakeiii\"s\n\x08GameTurn\x12\x0f\n\x07game_id\x18\x01 \x01(\t\x12-\n\x0cplaced_piece\x18\x02 \x01(\x0e\x32\x17.milkshakeiii.PieceType\x12\x14\n\x0c\x63olumn_place\x18\x03 \x01(\x05\x12\x11\n\trow_place\x18\x04 \x01(\x05\"@\n\x0bGameHistory\x12\x31\n\x11\x63onstituent_turns\x18\x01 \x03(\x0b\x32\x16.milkshakeiii.GameTurn*u\n\tPieceType\x12\x0c\n\x08NO_PIECE\x10\x00\x12\n\n\x06\x43IRCLE\x10\x01\x12\n\n\x06SQUARE\x10\x02\x12\x11\n\rDOWN_TRIANGLE\x10\x03\x12\x0f\n\x0bUP_TRIANGLE\x10\x04\x12\x06\n\x02\x45X\x10\x05\x12\t\n\x05UP_EL\x10\x06\x12\x0b\n\x07\x44OWN_EL\x10\x07')
+  serialized_pb='\n\x12milkshakeiii.proto\x12\x0cmilkshakeiii\"\x86\x01\n\x08GameTurn\x12\x0f\n\x07game_id\x18\x01 \x01(\t\x12-\n\x0cplaced_piece\x18\x02 \x01(\x0e\x32\x17.milkshakeiii.PieceType\x12\x14\n\x0c\x63olumn_place\x18\x03 \x01(\x05\x12\x11\n\trow_place\x18\x04 \x01(\x05\x12\x11\n\tplayer_id\x18\x05 \x01(\t\"@\n\x0bGameHistory\x12\x31\n\x11\x63onstituent_turns\x18\x01 \x03(\x0b\x32\x16.milkshakeiii.GameTurn*u\n\tPieceType\x12\x0c\n\x08NO_PIECE\x10\x00\x12\n\n\x06\x43IRCLE\x10\x01\x12\n\n\x06SQUARE\x10\x02\x12\x11\n\rDOWN_TRIANGLE\x10\x03\x12\x0f\n\x0bUP_TRIANGLE\x10\x04\x12\x06\n\x02\x45X\x10\x05\x12\t\n\x05UP_EL\x10\x06\x12\x0b\n\x07\x44OWN_EL\x10\x07')
 
 _PIECETYPE = _descriptor.EnumDescriptor(
   name='PieceType',
@@ -57,8 +57,8 @@ _PIECETYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=219,
-  serialized_end=336,
+  serialized_start=239,
+  serialized_end=356,
 )
 
 PieceType = enum_type_wrapper.EnumTypeWrapper(_PIECETYPE)
@@ -108,6 +108,13 @@ _GAMETURN = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='player_id', full_name='milkshakeiii.GameTurn.player_id', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -117,8 +124,8 @@ _GAMETURN = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=36,
-  serialized_end=151,
+  serialized_start=37,
+  serialized_end=171,
 )
 
 
@@ -145,8 +152,8 @@ _GAMEHISTORY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=153,
-  serialized_end=217,
+  serialized_start=173,
+  serialized_end=237,
 )
 
 _GAMETURN.fields_by_name['placed_piece'].enum_type = _PIECETYPE
