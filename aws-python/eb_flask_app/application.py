@@ -1,7 +1,7 @@
 from flask import Flask, request
 from milkshakeiii_pb2 import *
 from pure_functions import *
-
+from client import *
 
 
 
@@ -41,14 +41,40 @@ def game_representation(game_id):
 	for i in range(len(game)):
 		row_string = ""
 		for j in range(len(game[0])):
-			row_string = row_string + str(game[i][j]) + "__"
+			row_string = row_string + PieceRepresentation(game[i][j]) + " "
 		game_string = game_string + row_string  + "<br>"
 	return game_string
+
+@application.route("/url_turn/<game_id>/<player_id>/<piece>/<row>/<column>")
+def url_turn(game_id, player_id, piece, row, column):
+	piece_enum = NO_PIECE
+	if (piece == "O"):
+		piece_enum = CIRCLE
+	if (piece == "H"):
+		piece_enum = SQUARE
+	if (piece == "X"):
+		piece_enum = EX
+	if (piece == "v"):
+		piece_enum = DOWN_TRIANGLE
+	if (piece == "^"):
+		piece_enum = UP_TRIANGLE
+	if (piece == "7"):
+		piece_enum = DOWN_EL
+	if (piece == "L"):
+		piece_enum = UP_EL
+	if (piece_enum == NO_PIECE):
+		return "that's not a valid piece.  valid pieces are: O, H, X, v, ^, 7, L"
+	turn_proto = pack_turn_proto(game_id, player_id, piece_enum, int(row), int(column))
+	return do_turn(turn_proto)
 
 @application.route("/take_turn", methods=["POST"])
 def take_turn():
 	turn = GameTurn()
 	turn.ParseFromString(request.data)
+	
+	return do_turn(turn)
+
+def do_turn(turn):
 	game = get_game(turn.game_id)
 	game_history = get_game_history(turn.game_id)
 
@@ -57,8 +83,8 @@ def take_turn():
 
 	game = ResultOfPlace(game, turn)
 	record_turn(turn.game_id, turn)
-
 	return "success?"
+
 
 def get_game_history(game_id):
 	game_history = games.setdefault(game_id, GameHistory())

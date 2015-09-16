@@ -3,6 +3,25 @@ from milkshakeiii_pb2 import *
 def EmptyGame(height = 8, width = 8):
 	return ([[NO_PIECE for i in range(height)] for j in range(width)])
 
+def PieceRepresentation(piece):
+	if (piece == NO_PIECE):
+		return "-"
+	if (piece == CIRCLE):
+		return "O"
+	if (piece == SQUARE):
+		return "H"
+	if (piece == UP_TRIANGLE):
+		return "^"
+	if (piece == DOWN_TRIANGLE):
+		return "v"
+	if (piece == UP_EL):
+		return "L"
+	if (piece == DOWN_EL):
+		return "7"
+	if (piece == EX):
+		return "X"
+	return "?"
+
 def ValidateTurn(game_history, turn):
 	game = GameFromHistory(game_history)
 	game = ResultOfPlace(game, turn)
