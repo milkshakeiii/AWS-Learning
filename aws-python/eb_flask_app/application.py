@@ -62,8 +62,14 @@ def url_turn(game_id, player_id, piece, row, column):
 		piece_enum = DOWN_EL
 	if (piece == "L"):
 		piece_enum = UP_EL
+	if (piece == "I"):
+		piece_enum = I
+	if (piece == "~"):
+		piece_enum = TILDE
+	if (piece == "Q"):
+		piece_enum = CUE
 	if (piece_enum == NO_PIECE):
-		return "that's not a valid piece.  valid pieces are: O, H, X, v, ^, 7, L"
+		return "that's not a valid piece.  valid pieces are: O, H, X, v, ^, 7, L, I, ~, Q"
 	turn_proto = pack_turn_proto(game_id, player_id, piece_enum, int(row), int(column))
 	return do_turn(turn_proto)
 

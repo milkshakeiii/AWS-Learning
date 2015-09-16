@@ -10,6 +10,9 @@ enum PieceType
 	EX = 5;
 	UP_EL = 6;
 	DOWN_EL = 7;
+	I = 8;
+	TILDE = 9;
+	CUE = 10;
 }
 
 message GameTurn

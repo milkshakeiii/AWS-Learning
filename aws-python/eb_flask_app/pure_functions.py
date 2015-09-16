@@ -20,6 +20,12 @@ def PieceRepresentation(piece):
 		return "7"
 	if (piece == EX):
 		return "X"
+	if (piece == I):
+		return "I"
+	if (piece == CUE):
+		return "Q"
+	if (piece == TILDE):
+		return "~"
 	return "?"
 
 def ValidateTurn(game_history, turn):
@@ -85,14 +91,14 @@ def ResultOfActivate(game, row, column):
 	game[row][column] = 0
 	print str(piece) + " exploded"
 	if (piece == SQUARE):
-		game = Propagate(game, (0, 1), row, column, -1)
-		game = Propagate(game, (0, -1), row, column, -1)
-		game = Propagate(game, (1, 0), row, column, -1)
-		game = Propagate(game, (-1, 0), row, column, -1)
+		game = Propagate(game, (0, 1), row, column, 1)
+		game = Propagate(game, (0, -1), row, column, 1)
+		game = Propagate(game, (1, 0), row, column, 1)
+		game = Propagate(game, (-1, 0), row, column, 1)
 	if (piece == DOWN_TRIANGLE):
-		game = Propagate(game, (0, 1), row, column, -1)
-		game = Propagate(game, (1, -1), row, column, -1)
-		game = Propagate(game, (-1, -1), row, column, -1)
+		game = Propagate(game, (0, 1), row, column, 2)
+		game = Propagate(game, (1, -1), row, column, 1)
+		game = Propagate(game, (-1, -1), row, column, 1)
 	if (piece == CIRCLE):
 		game = Propagate(game, (0, 1), row, column, 1)
 		game = Propagate(game, (0, -1), row, column, 1)
@@ -103,20 +109,28 @@ def ResultOfActivate(game, row, column):
 		game = Propagate(game, (1, -1), row, column, 1)
 		game = Propagate(game, (-1, -1), row, column, 1)
 	if (piece == UP_TRIANGLE):
-		game = Propagate(game, (0, -1), row, column, -1)
-		game = Propagate(game, (1, 1), row, column, -1)
-		game = Propagate(game, (-1, 1), row, column, -1)
+		game = Propagate(game, (0, -1), row, column, 2)
+		game = Propagate(game, (1, 1), row, column, 1)
+		game = Propagate(game, (-1, 1), row, column, 1)
 	if (piece == EX):
-		game = Propagate(game, (1, 1), row, column, -1)
-		game = Propagate(game, (1, -1), row, column, -1)
-		game = Propagate(game, (-1, 1), row, column, -1)
-		game = Propagate(game, (-1, -1), row, column, -1)
+		game = Propagate(game, (1, 1), row, column, 1)
+		game = Propagate(game, (1, -1), row, column, 1)
+		game = Propagate(game, (-1, 1), row, column, 1)
+		game = Propagate(game, (-1, -1), row, column, 1)
 	if (piece == DOWN_EL):
 		game = Propagate(game, (0, 1), row, column, 2)
 		game = Propagate(game, (-1, 0), row, column, 2)
 	if (piece == UP_EL):
 		game = Propagate(game, (0, -1), row, column, 2)
 		game = Propagate(game, (1, 0), row, column, 2)
+	if (piece == I):
+		game = Propagate(game, (0, 1), row, column, 2)
+		game = Propagate(game, (0, -1), row, column, 2)
+	if (piece == TILDE):
+		game = Propagate(game, (1, 0), row, column, 2)
+		game = Propagate(game, (-1, 0), row, column, 2)
+	if (piece == CUE):
+		game = Propagate(game, (2, 2), row, column, -1)
 	if (piece == NO_PIECE):
 		raise Exception("Result of Activate was called on a square with NO_PIECE!")
 	return game

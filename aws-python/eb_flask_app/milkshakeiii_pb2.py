@@ -14,7 +14,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='milkshakeiii.proto',
   package='milkshakeiii',
-  serialized_pb='\n\x12milkshakeiii.proto\x12\x0cmilkshakeiii\"\x86\x01\n\x08GameTurn\x12\x0f\n\x07game_id\x18\x01 \x01(\t\x12-\n\x0cplaced_piece\x18\x02 \x01(\x0e\x32\x17.milkshakeiii.PieceType\x12\x14\n\x0c\x63olumn_place\x18\x03 \x01(\x05\x12\x11\n\trow_place\x18\x04 \x01(\x05\x12\x11\n\tplayer_id\x18\x05 \x01(\t\"@\n\x0bGameHistory\x12\x31\n\x11\x63onstituent_turns\x18\x01 \x03(\x0b\x32\x16.milkshakeiii.GameTurn*u\n\tPieceType\x12\x0c\n\x08NO_PIECE\x10\x00\x12\n\n\x06\x43IRCLE\x10\x01\x12\n\n\x06SQUARE\x10\x02\x12\x11\n\rDOWN_TRIANGLE\x10\x03\x12\x0f\n\x0bUP_TRIANGLE\x10\x04\x12\x06\n\x02\x45X\x10\x05\x12\t\n\x05UP_EL\x10\x06\x12\x0b\n\x07\x44OWN_EL\x10\x07')
+  serialized_pb='\n\x12milkshakeiii.proto\x12\x0cmilkshakeiii\"\x86\x01\n\x08GameTurn\x12\x0f\n\x07game_id\x18\x01 \x01(\t\x12-\n\x0cplaced_piece\x18\x02 \x01(\x0e\x32\x17.milkshakeiii.PieceType\x12\x14\n\x0c\x63olumn_place\x18\x03 \x01(\x05\x12\x11\n\trow_place\x18\x04 \x01(\x05\x12\x11\n\tplayer_id\x18\x05 \x01(\t\"@\n\x0bGameHistory\x12\x31\n\x11\x63onstituent_turns\x18\x01 \x03(\x0b\x32\x16.milkshakeiii.GameTurn*\x90\x01\n\tPieceType\x12\x0c\n\x08NO_PIECE\x10\x00\x12\n\n\x06\x43IRCLE\x10\x01\x12\n\n\x06SQUARE\x10\x02\x12\x11\n\rDOWN_TRIANGLE\x10\x03\x12\x0f\n\x0bUP_TRIANGLE\x10\x04\x12\x06\n\x02\x45X\x10\x05\x12\t\n\x05UP_EL\x10\x06\x12\x0b\n\x07\x44OWN_EL\x10\x07\x12\x05\n\x01I\x10\x08\x12\t\n\x05TILDE\x10\t\x12\x07\n\x03\x43UE\x10\n')
 
 _PIECETYPE = _descriptor.EnumDescriptor(
   name='PieceType',
@@ -54,11 +54,23 @@ _PIECETYPE = _descriptor.EnumDescriptor(
       name='DOWN_EL', index=7, number=7,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='I', index=8, number=8,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='TILDE', index=9, number=9,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='CUE', index=10, number=10,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=239,
-  serialized_end=356,
+  serialized_start=240,
+  serialized_end=384,
 )
 
 PieceType = enum_type_wrapper.EnumTypeWrapper(_PIECETYPE)
@@ -70,6 +82,9 @@ UP_TRIANGLE = 4
 EX = 5
 UP_EL = 6
 DOWN_EL = 7
+I = 8
+TILDE = 9
+CUE = 10
 
 
 
