@@ -1,0 +1,30 @@
+package milkshakeiii;
+
+enum PieceType
+{
+	NO_PIECE = 0;
+	CIRCLE = 1;
+	SQUARE = 2;
+	DOWN_TRIANGLE = 3;
+	UP_TRIANGLE = 4;
+	EX = 5;
+	UP_EL = 6;
+	DOWN_EL = 7;
+	I = 8;
+	TILDE = 9;
+	CUE = 10;
+}
+
+message GameTurn
+{
+	optional string game_id = 1;
+	optional PieceType placed_piece = 2;
+	optional int32 column_place = 3;
+	optional int32 row_place = 4;
+	optional string player_id = 5;
+}
+
+message GameHistory
+{
+	repeated GameTurn constituent_turns = 1;
+}
