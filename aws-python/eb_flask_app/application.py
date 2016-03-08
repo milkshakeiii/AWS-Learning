@@ -1,5 +1,5 @@
 from flask import Flask, request
-from pure_functions import *
+from game_functions import *
 from client import *
 
 
@@ -20,15 +20,6 @@ def game_command():
 	response = handle_command(request.data)
 	
 	return response
-
-def handle_command(command):
-	words = command.split()
-	if len(words) == 0:
-		return "Invalid command"
-	
-	name = words[0]
-	action = command[len(name):]
-	return name + " commanded: " + action
 
 # run the app
 if __name__ == "__main__":
