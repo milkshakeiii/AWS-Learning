@@ -1,7 +1,7 @@
 import requests
 
-API_URL = "http://api.milkshakeiii.com/"
-#API_URL = "http://192.168.0.12:5000/"
+#API_URL = "http://api.milkshakeiii.com/"
+API_URL = "http://192.168.0.16:5000/"
 
 def submit_command(command):
 	request_body_string = command

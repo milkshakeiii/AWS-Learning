@@ -1,12 +1,17 @@
 from flask import Flask, request
-from game_functions import *
-from client import *
-
-
+from flask_sqlalchemy import SQLAlchemy
 
 
 # EB looks for an 'application' callable by default
 application = Flask(__name__)
+application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///henry-local-db' #first-eb-python-app-dev.us-west-2.elasticbeanstalk.com/'
+application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(application)
+
+
+from game_functions import *
+from models import *
+
 
 @application.route("/")
 def index():
@@ -20,6 +25,8 @@ def game_command():
 	response = handle_command(request.data)
 	
 	return response
+
+
 
 # run the app
 if __name__ == "__main__":
