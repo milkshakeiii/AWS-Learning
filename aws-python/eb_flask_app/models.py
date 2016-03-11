@@ -5,6 +5,9 @@ class User(db.Model):
 	username = db.Column(db.String(80), unique=True)
 	email = db.Column(db.String(120), unique=True)
 
+	zone_id = db.Column(db.Integer, db.ForeignKey('zone.id'))
+	zone = db.relationship('Zone', backref=db.backref('users', lazy='dynamic'))
+
 	def __init__(self, username, email):
 		self.username = username
 		self.email = email
