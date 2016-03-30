@@ -42,6 +42,8 @@ def get_games():
 
 # run the app
 if __name__ == "__main__":
+	db.create_all()
+
 	#debug true enables debug
 	#but shouldn't be used in production
 	#because we hate debugging
