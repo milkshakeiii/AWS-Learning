@@ -22,9 +22,9 @@ class GetGamesRequest():
 		self.username = username
 		self.league_name = league_name
 
-class GetGameResponse():
+class GetGamesResponse():
 	def __init__(self, games):
 		self.games = games
 	
 	def __repr__(self):
-		return "<GetGamesResponse with " + len(self.games) + " games>"
+		return "<GetGamesResponse with " + str(len(self.games)) + " games>"

@@ -3,7 +3,7 @@ from messages import *
 
 EB = "http://api.milkshakeiii.com/"
 LOCAL = "http://192.168.0.16:5000/"
-API_URL = EB
+API_URL = LOCAL
 
 def submit_queue_request(queue_request):
 	request_body_string = pickle.dumps(queue_request)
