@@ -1,18 +1,10 @@
 from models import *
 
-def handle_command(command):
-	words = command.split()
-	if len(words) == 0:
-		return "Invalid command"
-	
-	name = words[0]
-	action = command[len(name):]
-	action_words = action.split()
+def handle_queue(queue_request):
+	name = queue_request.username
 
-	if action_words[0] == "hello":
-		response = hello(name, action_words)
-	else:
-		response = name + " commanded: " + action
+	response = hello(name)
+
 
 	db.session.commit()
 	return response
@@ -20,7 +12,7 @@ def handle_command(command):
 
 
 
-def hello(name, words):
+def hello(name):
 	matching_users = User.query.filter_by(username=name).all()
 	if len(matching_users) == 1:
 		return "Hello, " + name + ". I recognize you!"

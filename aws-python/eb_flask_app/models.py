@@ -5,8 +5,8 @@ class User(db.Model):
 	username = db.Column(db.String(80), unique=True)
 	email = db.Column(db.String(120), unique=True)
 
-	zone_id = db.Column(db.Integer, db.ForeignKey('zone.id'))
-	zone = db.relationship('Zone', backref=db.backref('users', lazy='dynamic'))
+	rankings = db.relationship('Ranking', backref = 'user', lazy = 'dynamic')
+	submissions = db.relationship('Submission', backref = 'user', lazy = 'dynamic')
 
 	def __init__(self, username, email):
 		self.username = username
@@ -15,32 +15,32 @@ class User(db.Model):
 	def __repr__(self):
 		return '<User %r>' % self.username
 
-zone_to_zone = db.Table("zone_to_zone", db.Model.metadata,
-	db.Column("from_zone_id", db.Integer, db.ForeignKey("zone.id"), primary_key=True),
-	db.Column("to_zone_id", db.Integer, db.ForeignKey("zone.id"), primary_key=True))
 
-class Zone(db.Model):
-	__tablename_ = "zone"
+class Ranking(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
-	name = db.Column(db.String(160), unique=True)
+	
+	league_name = db.Column(db.String(160), unique=True)
+	mmr = (db.Integer)
 
-	to_zones = db.relationship("Zone",
-		secondary = zone_to_zone,
-		primaryjoin = id==zone_to_zone.c.from_zone_id,
-		secondaryjoin = id==zone_to_zone.c.to_zone_id,
-		backref = "from_zones")
-
-	def connect_to(self, zone):
-		if zone not in self.to_zones:
-			self.to_zones.append(zone)
-		if self not in zone.to_zones:
-			zone.to_zones.append(self)
-
-	def disconnect_from(self, zone):
-		if zone in self.to_zones:
-			self.to_zones.remove(zone)
-		if self in zone.to_zones:
-			zone.to_zones.remove(self)
+	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+	
 
 	def __repr__ (self):
 		return '<Zone %r>' % self.name
+
+class Game(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	league_name = db.Column(db.String(160), unique=True)
+
+	submissions = db.relationship('Submission', backref = 'game', lazy = 'dynamic')
+	map_data = db.Column(db.PickleType)
+
+	winning_submission_id = (db.Integer)
+
+class Submission(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+
+	game_id = db.Column(db.Integer, db.ForeignKey('game.id'))
+	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+	submission_data = db.Column(db.PickleType)

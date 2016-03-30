@@ -20,12 +20,17 @@ def index():
 	footer_text = '</body>\n</html>'
 	return header_text + "heya" + footer_text
 
-@application.route("/game_command", methods=["POST"])
-def game_command():
-	response = handle_command(request.data)
+@application.route("/queue", methods=["POST"])
+def queue():
+	response = handle_queue(request.data)
 	
 	return response
 
+@application.route("/get_games", methods=["POST"])
+def get_games():
+	response = handle_get_games(request.data)
+
+	return response
 
 
 # run the app
