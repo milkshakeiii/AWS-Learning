@@ -24,6 +24,9 @@ class Ranking(db.Model):
 
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 	
+	def __init__(self, league_name, user):
+		self.user = user
+		self.league_name = league_name
 
 	def __repr__ (self):
 		return '<Zone %r>' % self.name
@@ -37,6 +40,13 @@ class Game(db.Model):
 
 	winning_submission_id = (db.Integer)
 
+	def __init__(self, league_name, map_data):
+		self.league_name = league_name
+		self.map_data = map_data
+
+	def __repr__ (self):
+		return '<Game ' + self.id + ', league ' + self.league_name + '>'
+
 class Submission(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 
@@ -44,3 +54,11 @@ class Submission(db.Model):
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 	submission_data = db.Column(db.PickleType)
+
+	def __init__(self, game, user, submission_data):
+		self.game = game
+		self.user = user
+		self.submission_data = submission_data
+
+	def __repr__(self):
+		return '<Submission ' + self.id + ' - ' + self.user.name + '>'

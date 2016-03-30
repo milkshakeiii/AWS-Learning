@@ -1,10 +1,11 @@
 from models import *
+from messages import *
 
 def handle_queue(queue_request):
 	name = queue_request.username
 
-	response = hello(name)
-
+	response_message = hello(name)
+	response = QueueResponse(True, response_message)
 
 	db.session.commit()
 	return response
@@ -22,3 +23,7 @@ def hello(name):
 		return "Hello, " + name + ", and welcome!"
 	else:
 		return "Wait, do you have a twin?  Something is wrong..."
+
+
+def handle_get_games(get_games_request):
+	return GetGamesResponse([])

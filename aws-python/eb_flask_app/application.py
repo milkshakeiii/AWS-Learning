@@ -1,6 +1,7 @@
+import pickle
+
 from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
-
 
 # EB looks for an 'application' callable by default
 application = Flask(__name__)
@@ -11,7 +12,7 @@ db = SQLAlchemy(application)
 
 from game_functions import *
 from models import *
-
+from messages import *
 
 @application.route("/")
 def index():
@@ -22,15 +23,21 @@ def index():
 
 @application.route("/queue", methods=["POST"])
 def queue():
-	response = handle_queue(request.data)
-	
-	return response
+	queue_request_object = pickle.loads(request.data)
+	response = handle_queue(queue_request_object)
+
+	pickled_queue = pickle.dumps(response)	
+
+	return pickled_queue
 
 @application.route("/get_games", methods=["POST"])
 def get_games():
-	response = handle_get_games(request.data)
+	get_games_request_object = pickle.loads(request.data)
+	games = handle_get_games(get_games_request_object)
 
-	return response
+	pickled_games = pickle.dumps(games)
+
+	return pickled_games
 
 
 # run the app
