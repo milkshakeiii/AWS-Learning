@@ -18,13 +18,17 @@ class QueueResponse():
 		return "<QueueResponse, " + result + " - " + self.message + ">"
 
 class GetGamesRequest():
-	def __init__(self, username, league_name):
+	def __init__(self, username):
 		self.username = username
-		self.league_name = league_name
 
 class GetGamesResponse():
-	def __init__(self, games):
-		self.games = games
+	def __init__(self, game_reports):
+		self.game_reports = game_reports
 	
 	def __repr__(self):
-		return "<GetGamesResponse with " + str(len(self.games)) + " games>"
+		return "<GetGamesResponse with " + str(len(self.game_reports)) + " games>"
+
+class GameReport():
+	def __init__(self, submissions, map):
+		self.submissions = submissions
+		self.map = map

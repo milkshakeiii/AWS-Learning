@@ -19,7 +19,7 @@ def index():
 	#bits of text for the page
 	header_text = '''<html>\n<head><title>milkshakeiii's api</title></head>\n<body>'''
 	footer_text = '</body>\n</html>'
-	return header_text + "heya" + footer_text
+	return header_text + get_index_text() + footer_text
 
 @application.route("/queue", methods=["POST"])
 def queue():
