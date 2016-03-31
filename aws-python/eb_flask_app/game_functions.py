@@ -21,7 +21,7 @@ def handle_queue(queue_request):
 	if len(league_list) >= 2:
 		do_two_player_game(league_list, league_name)
 
-	
+	print league_queues
 	response = QueueResponse(True, response_message)
 	db.session.commit()
 	return response
@@ -72,7 +72,6 @@ def hello(name):
 
 
 def handle_get_games(get_games_request):
-	print player_unread_games
 	name = get_games_request.username
 	games = player_unread_games.get(name, [])
 	player_unread_games[name] = []
@@ -99,7 +98,7 @@ def get_index_text():
 		for i in range(len(sorted_users)):
 			user_mmr = sorted_users[i]
 			text = text + str(i+1) + ": " + user_mmr[1] + " - " + str(user_mmr[0]) + "<br>"
-
+		text = text + "<br><br><br>"
 	text = text + "<br><br><br> currently queued: " + str(league_queues)
 
 	return text
