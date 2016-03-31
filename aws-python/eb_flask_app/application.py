@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 # EB looks for an 'application' callable by default
 application = Flask(__name__)
-application.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://milkshakeiii:password@aa9h1ykact4edj.comeuynrtwyg.us-west-2.rds.amazonaws.com:3306'
+application.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://DB_CONNECTION_PLACEHOLDER'
 application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(application)
 
