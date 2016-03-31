@@ -14,10 +14,14 @@ def handle_queue(queue_request):
 	if league_name not in league_queues:
 		league_queues[league_name] = []
 	league_queues[league_name].append((user, submission))
+	
+	
+	#for now, perform a two player game whenever two players have queued
 	league_list = league_queues[league_name]
 	if len(league_list) >= 2:
 		do_two_player_game(league_list, league_name)
 
+	
 	response = QueueResponse(True, response_message)
 	db.session.commit()
 	return response
@@ -58,11 +62,11 @@ def do_two_player_game(league_list, league_name):
 def hello(name):
 	matching_users = User.query.filter_by(username=name).all()
 	if len(matching_users) == 1:
-		return "Hello, " + name + ". I recognize you!"
+		return "Hello, " + name + ". I recognize you!  Your submission has been queued."
 	elif len(matching_users) == 0:
 		new_user = User(name, name + '@no_email_given.com')
 		db.session.add(new_user)
-		return "Hello, " + name + ", and welcome!"
+		return "Hello, " + name + ", and welcome!  Your submission has been queued."
 	else:
 		return "Wait, do you have a twin?  Something is wrong..."
 
@@ -79,8 +83,26 @@ def handle_get_games(get_games_request):
 	return response
 
 def get_index_text():
-	return "leaguey league"
+	user_mmr_by_league = {}
+	for ranking in Ranking.query.all():
+		league_name = ranking.league_name
+		if league_name in user_mmr_by_league:
+			user_mmr_by_league[league_name] = user_mmr_by_league[league_name] + [(ranking.mmr, ranking.user.username)]
+		else:
+			user_mmr_by_league[league_name] = [(ranking.mmr, ranking.user.username)]
 
+	text = ""
+	for item in user_mmr_by_league.items():
+		text = text + "--------- " + item[0] + " ---------<br>"
+		user_mmrs = item[1]
+		sorted_users = list(reversed(sorted(user_mmrs)))
+		for i in range(len(sorted_users)):
+			user_mmr = sorted_users[i]
+			text = text + str(i+1) + ": " + user_mmr[1] + " - " + str(user_mmr[0]) + "<br>"
+
+	text = text + "<br><br><br> currently queued: " + str(league_queues)
+
+	return text
 
 def game_result(submissions, map):
 	if (len(submissions) < 2):
