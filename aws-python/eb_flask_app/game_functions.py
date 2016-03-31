@@ -99,7 +99,11 @@ def get_index_text():
 			user_mmr = sorted_users[i]
 			text = text + str(i+1) + ": " + user_mmr[1] + " - " + str(user_mmr[0]) + "<br>"
 		text = text + "<br><br><br>"
-	text = text + "<br><br><br> currently queued: " + str(league_queues)
+	text = text + "<br><br><br> currently queued: "
+	
+	for league in league_queues.values():
+		for player_submission in league:
+			text = text + player_submission[0].username + ", "
 
 	return text
 
