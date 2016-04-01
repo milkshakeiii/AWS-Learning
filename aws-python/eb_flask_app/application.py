@@ -9,7 +9,6 @@ application.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://DB_CONNECTION_PLACEHOLD
 application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(application)
 
-
 from game_functions import *
 from models import *
 from messages import *
@@ -48,4 +47,10 @@ if __name__ == "__main__":
 	#but shouldn't be used in production
 	#because we hate debugging
 	application.debug = True
+
+
+	import logging
+	logging.basicConfig(filename='error.log',level=logging.DEBUG)
+
+
 	application.run('0.0.0.0')
