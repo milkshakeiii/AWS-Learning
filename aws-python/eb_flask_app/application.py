@@ -48,4 +48,8 @@ if __name__ == "__main__":
 	#because we hate debugging
 	application.debug = True
 
+	import logging
+	application.logger.addHandler(logging.StreamHandler())
+        application.logger.setLevel(logging.INFO)
+
 	application.run('0.0.0.0')
