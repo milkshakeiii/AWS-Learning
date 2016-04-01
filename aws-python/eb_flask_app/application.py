@@ -48,9 +48,4 @@ if __name__ == "__main__":
 	#because we hate debugging
 	application.debug = True
 
-
-	import logging
-	logging.basicConfig(filename='error.log',level=logging.DEBUG)
-
-
 	application.run('0.0.0.0')
