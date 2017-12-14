@@ -3,7 +3,7 @@
     <Files>
       <File FileName="Assets/Scripts/Board.cs" Line="22" Column="40" />
       <File FileName="Assets/Scripts/CameraMovement.cs" Line="15" Column="164" />
-      <File FileName="Assets/WebGLTemplates/BetterMinimal/index.html" Line="1" Column="1" />
+      <File FileName="Assets/WebGLTemplates/BetterMinimal/index.html" Line="33" Column="21" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
