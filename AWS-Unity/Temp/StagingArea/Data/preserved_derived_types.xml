@@ -1,0 +1,6 @@
+<linker>
+<assembly fullname="Assembly-CSharp">
+<type fullname="Board" preserve="all"/>
+<type fullname="CameraMovement" preserve="all"/>
+</assembly>
+</linker>
